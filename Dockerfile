@@ -12,6 +12,8 @@ ADD nginx.conf /etc/
 RUN mkdir -p /repos/sentinel
 RUN cd /repos/sentinel; git --bare init .
 
+RUN sed -i.bak 's/listen = \/var\/run\/php5-fpm\.sock/listen = 127\.0\.0\.1:9000/g' /etc/php5/fpm/pool.d/www.conf
+
 CMD service php5-fpm restart; nginx -c /etc/nginx.conf
 
 
